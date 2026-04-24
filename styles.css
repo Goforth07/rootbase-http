@@ -114,7 +114,7 @@ img, svg { display: block; max-width: 100%; }
 
 .hero-inner {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: 64px;
   align-items: center;
 }
@@ -202,81 +202,37 @@ img, svg { display: block; max-width: 100%; }
   opacity: 0.6;
 }
 
-/* ============ Phone wireframes ============ */
+/* ============ Hero composite ============ */
 .hero-visual {
-  position: relative;
-  min-height: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.phone {
-  position: absolute;
-  width: 240px;
-  height: 500px;
-  border: 2.5px solid var(--dark);
-  border-radius: 40px;
-  background: var(--card);
-  padding: 16px;
-  box-shadow: 0 20px 60px -20px rgba(44, 36, 24, 0.25);
-}
-
-.phone::before {
-  content: "";
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 6px;
-  background: var(--dark);
-  border-radius: 3px;
-  opacity: 0.3;
-}
-
-.phone-screen {
+.hero-composite {
   width: 100%;
-  height: 100%;
-  border-radius: 28px;
-  background: var(--bg);
+  max-width: 680px;
+  height: auto;
+  display: block;
+}
+
+/* ============ Screenshots section ============ */
+.screenshots {
+  padding: 56px 0 24px;
+}
+
+.screenshots-row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 14px;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
 }
 
-.phone-leaf {
-  width: 56px;
-  height: 56px;
-}
-
-.phone-placeholder {
-  margin: 0;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--text);
-  opacity: 0.5;
-  text-align: center;
-  padding: 0 16px;
-}
-
-.phone-front {
-  top: 10px;
-  left: 50%;
-  transform: translateX(-85%);
-  z-index: 2;
-}
-
-.phone-back {
-  top: 70px;
-  left: 50%;
-  transform: translateX(-15%);
+.screenshot {
   width: 220px;
-  height: 460px;
-  opacity: 0.8;
-  z-index: 1;
+  height: auto;
+  display: block;
 }
 
 /* ============ Divider ============ */
@@ -534,17 +490,11 @@ img, svg { display: block; max-width: 100%; }
   }
   .hero-body { font-size: 17px; }
   .hero-visual {
-    min-height: 440px;
     order: 2;
   }
-  .phone {
+  .screenshot {
     width: 200px;
-    height: 420px;
-    border-radius: 34px;
-  }
-  .phone-back {
-    width: 184px;
-    height: 380px;
+    max-width: 200px;
   }
   .features { padding: 72px 0; }
   .cta-section { padding: 24px 0 80px; }
@@ -557,23 +507,14 @@ img, svg { display: block; max-width: 100%; }
 
 @media (max-width: 560px) {
   .features-grid { grid-template-columns: 1fr; }
-  .hero-visual { min-height: 380px; }
-  .phone {
-    width: 180px;
-    height: 370px;
-  }
-  .phone-back {
-    width: 164px;
-    height: 330px;
+  .screenshots-row { gap: 20px; }
+  .screenshot {
+    width: 160px;
+    max-width: 160px;
   }
 }
 
 @media (max-width: 420px) {
   .nav-inner .pill { display: none; }
   .container { padding: 0 18px; }
-  .hero-visual {
-    min-height: 340px;
-  }
-  .phone-back { display: none; }
-  .phone-front { transform: translateX(-50%); }
 }
