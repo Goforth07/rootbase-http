@@ -425,8 +425,6 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .logo-footer { color: var(--on-dark); }
-.logo-footer .logo-mark path { fill: var(--accent-light); }
-.logo-footer .logo-mark line { stroke: var(--dark); }
 
 .footer-links {
   display: flex;
