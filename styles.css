@@ -285,13 +285,6 @@ img, svg { display: block; max-width: 100%; }
   display: block;
 }
 
-/* The composite has a cream background baked in; frame it as a card on dark. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .hero-composite { border-radius: 24px; }
-}
-
-:root[data-theme="dark"] .hero-composite { border-radius: 24px; }
-
 /* ============ Screenshots section ============ */
 .screenshots {
   padding: 56px 0 24px;
