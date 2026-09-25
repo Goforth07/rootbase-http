@@ -9,9 +9,52 @@
   --dark: #2C2418;
   --on-dark: #F5F0E8;
   --on-dark-muted: #F5F0E899;
+  --on-brand: #F5F0E8;
+  --footer-bg: #2C2418;
+  --hairline: rgba(44, 36, 24, 0.06);
+  --divider-line: rgba(44, 36, 24, 0.18);
+  --summary-bg: rgba(151, 196, 89, 0.22);
   --radius-card: 14px;
   --radius-pill: 20px;
   --max-width: 1120px;
+  color-scheme: light;
+}
+
+/* Dark theme: follows the OS unless the visitor picked a theme with the toggle. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #1A1611;
+    --text: #EDE6D9;
+    --text-muted: #EDE6D999;
+    --brand: #97C459;
+    --accent: #7FB03D;
+    --accent-light: #B5DA82;
+    --card: #26211A;
+    --dark: #14110C;
+    --on-brand: #1A1611;
+    --footer-bg: #110E0A;
+    --hairline: rgba(237, 230, 217, 0.08);
+    --divider-line: rgba(237, 230, 217, 0.16);
+    --summary-bg: rgba(151, 196, 89, 0.12);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1A1611;
+  --text: #EDE6D9;
+  --text-muted: #EDE6D999;
+  --brand: #97C459;
+  --accent: #7FB03D;
+  --accent-light: #B5DA82;
+  --card: #26211A;
+  --dark: #14110C;
+  --on-brand: #1A1611;
+  --footer-bg: #110E0A;
+  --hairline: rgba(237, 230, 217, 0.08);
+  --divider-line: rgba(237, 230, 217, 0.16);
+  --summary-bg: rgba(151, 196, 89, 0.12);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -45,7 +88,7 @@ img, svg { display: block; max-width: 100%; }
   top: 0;
   background: var(--bg);
   z-index: 10;
-  border-bottom: 1px solid rgba(44, 36, 24, 0.06);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .nav-inner {
@@ -104,9 +147,47 @@ img, svg { display: block; max-width: 100%; }
 
 .pill-green {
   background: var(--brand);
-  color: var(--on-dark);
+  color: var(--on-brand);
   text-decoration: none;
 }
+
+/* ============ Theme toggle ============ */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--divider-line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-toggle[hidden] { display: none; }
+
+.theme-toggle:hover { color: var(--brand); border-color: var(--brand); }
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 2px;
+}
+
+.theme-toggle svg { width: 18px; height: 18px; }
+
+/* Show the icon for the theme a click switches to. */
+.theme-toggle .icon-sun { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 /* ============ Hero ============ */
 .hero {
@@ -167,6 +248,16 @@ img, svg { display: block; max-width: 100%; }
   object-fit: contain;
 }
 
+.app-store-badge .badge-dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .app-store-badge .badge-light { display: none; }
+  :root:not([data-theme="light"]) .app-store-badge .badge-dark { display: block; }
+}
+
+:root[data-theme="dark"] .app-store-badge .badge-light { display: none; }
+:root[data-theme="dark"] .app-store-badge .badge-dark { display: block; }
+
 .app-store-badge:focus-visible {
   outline: 2px solid var(--accent-light);
   outline-offset: 3px;
@@ -193,6 +284,13 @@ img, svg { display: block; max-width: 100%; }
   height: auto;
   display: block;
 }
+
+/* The composite has a cream background baked in; frame it as a card on dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero-composite { border-radius: 24px; }
+}
+
+:root[data-theme="dark"] .hero-composite { border-radius: 24px; }
 
 /* ============ Screenshots section ============ */
 .screenshots {
@@ -221,7 +319,7 @@ img, svg { display: block; max-width: 100%; }
   background: linear-gradient(
     to right,
     transparent 0%,
-    rgba(44, 36, 24, 0.18) 50%,
+    var(--divider-line) 50%,
     transparent 100%
   );
 }
@@ -341,9 +439,10 @@ img, svg { display: block; max-width: 100%; }
 
 /* ============ Footer ============ */
 .site-footer {
-  background: var(--dark);
+  background: var(--footer-bg);
   color: var(--on-dark);
   padding: 40px 0;
+  border-top: 1px solid var(--hairline);
 }
 
 .footer-inner {
@@ -430,7 +529,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .doc-summary {
-  background: rgba(151, 196, 89, 0.22);
+  background: var(--summary-bg);
   border-left: 3px solid var(--brand);
   padding: 16px 20px;
   border-radius: 0 10px 10px 0;
