@@ -156,51 +156,20 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .app-store-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #000;
-  color: #fff;
-  border: 1px solid #A6A6A6;
-  padding: 9px 20px 9px 16px;
-  border-radius: 12px;
-  text-decoration: none;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: left;
-  transition: transform 0.15s ease;
+  display: inline-block;
+  border-radius: 13px;
 }
 
-.app-store-badge:hover {
-  transform: translateY(-1px);
+.app-store-badge img {
+  display: block;
+  width: 245px;
+  height: 82px;
+  object-fit: contain;
 }
 
 .app-store-badge:focus-visible {
   outline: 2px solid var(--accent-light);
   outline-offset: 3px;
-}
-
-.app-store-badge-logo {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-}
-
-.app-store-badge-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.app-store-badge-small {
-  font-size: 12px;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-}
-
-.app-store-badge-large {
-  font-size: 26px;
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
 }
 
 .hero-meta {
