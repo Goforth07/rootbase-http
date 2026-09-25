@@ -248,6 +248,16 @@ img, svg { display: block; max-width: 100%; }
   object-fit: contain;
 }
 
+.app-store-badge .badge-dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .app-store-badge .badge-light { display: none; }
+  :root:not([data-theme="light"]) .app-store-badge .badge-dark { display: block; }
+}
+
+:root[data-theme="dark"] .app-store-badge .badge-light { display: none; }
+:root[data-theme="dark"] .app-store-badge .badge-dark { display: block; }
+
 .app-store-badge:focus-visible {
   outline: 2px solid var(--accent-light);
   outline-offset: 3px;
