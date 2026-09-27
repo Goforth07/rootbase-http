@@ -506,6 +506,7 @@ img, svg { display: block; max-width: 100%; }
   font-weight: 600;
   font-size: 19px;
   margin: 28px 0 10px;
+  scroll-margin-top: 96px;
 }
 
 .doc-page .doc-content a {
