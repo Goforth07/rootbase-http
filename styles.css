@@ -285,25 +285,6 @@ img, svg { display: block; max-width: 100%; }
   display: block;
 }
 
-/* ============ Screenshots section ============ */
-.screenshots {
-  padding: 56px 0 24px;
-}
-
-.screenshots-row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-
-.screenshot {
-  width: 220px;
-  height: auto;
-  display: block;
-}
-
 /* ============ Divider ============ */
 .divider {
   height: 1px;
@@ -391,6 +372,150 @@ img, svg { display: block; max-width: 100%; }
   color: var(--text);
   opacity: 0.78;
   margin: 0;
+}
+
+/* ============ Showcase ============ */
+.showcase {
+  padding: 24px 0 112px;
+}
+
+.showcase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 112px;
+}
+
+.showcase-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 112px;
+}
+
+.showcase-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.showcase-row--flip .showcase-copy { order: 2; }
+
+.showcase-copy { max-width: 440px; justify-self: center; }
+
+.showcase-copy .eyebrow { margin-bottom: 12px; }
+
+.showcase-title {
+  font-family: "Lora", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+  color: var(--text);
+}
+
+.showcase-body {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 0.8;
+  margin: 0;
+}
+
+.showcase-row--wide {
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.showcase-row--wide .showcase-copy {
+  max-width: 600px;
+  text-align: center;
+}
+
+/* Screenshots come composited into Apple's product bezels with the shadow baked in, since a
+   CSS drop-shadow on them painted in rectangular tiles while they decoded. The figure is sized
+   to the device; the image's shadow margins overflow it (percentages of the device's width). */
+.device {
+  margin: 0;
+  justify-self: center;
+}
+
+.device img {
+  display: block;
+  height: auto;
+}
+
+.device-phone {
+  width: 300px;
+  max-width: 100%;
+}
+
+.device-phone img {
+  width: 123.95%;
+  max-width: none;
+  margin: -5.31% 0 -18.64% -11.97%;
+}
+
+.device-tablet {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.device-tablet img {
+  width: 107.2%;
+  max-width: none;
+  margin: -1.59% 0 -5.61% -3.6%;
+}
+
+/* Pinned-phone tour: only with showcase.js, and only where there's room beside the captions. */
+.showcase-stage { display: none; }
+
+@media (min-width: 900px) {
+  .has-showcase-stage .showcase-tour {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .has-showcase-stage .showcase-steps { gap: 0; }
+
+  .has-showcase-stage .showcase-step {
+    display: flex;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .has-showcase-stage .showcase-step .device { display: none; }
+
+  .has-showcase-stage .showcase-step .showcase-copy {
+    order: 0;
+    opacity: 0.35;
+    transition: opacity 0.3s ease;
+  }
+
+  .has-showcase-stage .showcase-step.is-active .showcase-copy { opacity: 1; }
+
+  /* Phone is 300px wide, about 612px tall. */
+  .has-showcase-stage .showcase-stage {
+    display: grid;
+    position: sticky;
+    top: max(88px, calc(50vh - 306px));
+    margin: max(0px, calc(30vh - 306px)) 0;
+  }
+
+  .showcase-stage .showcase-shot {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .showcase-stage .showcase-shot.is-active { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-stage .showcase-shot,
+  .has-showcase-stage .showcase-step .showcase-copy { transition: none; }
 }
 
 /* ============ How check-ins work ============ */
@@ -669,12 +794,15 @@ img, svg { display: block; max-width: 100%; }
   .hero-visual {
     order: 2;
   }
-  .screenshot {
-    width: 200px;
-    max-width: 200px;
-  }
   .features { padding: 72px 0; }
   .how, .more { padding: 16px 0 72px; }
+  .showcase { padding: 16px 0 80px; }
+  .showcase-list, .showcase-steps { gap: 72px; }
+  .showcase-row { grid-template-columns: 1fr; gap: 32px; }
+  .showcase-row--flip .showcase-copy { order: 0; }
+  .showcase-copy { justify-self: start; }
+  .showcase-row--wide .showcase-copy { text-align: left; }
+  .device-phone { width: 240px; }
   .cta-section { padding: 24px 0 80px; }
   .footer-inner {
     flex-direction: column;
@@ -687,11 +815,6 @@ img, svg { display: block; max-width: 100%; }
   .features-grid { grid-template-columns: 1fr; }
   .how-steps { grid-template-columns: 1fr; gap: 28px; }
   .more-grid { grid-template-columns: 1fr; gap: 24px; }
-  .screenshots-row { gap: 20px; }
-  .screenshot {
-    width: 160px;
-    max-width: 160px;
-  }
 }
 
 @media (max-width: 420px) {
