@@ -102,8 +102,10 @@ img, svg { display: block; max-width: 100%; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
   text-decoration: none;
   color: var(--text);
+  white-space: nowrap;
 }
 
 .logo-mark {
@@ -128,6 +130,7 @@ img, svg { display: block; max-width: 100%; }
 .nav-link {
   color: var(--text);
   text-decoration: none;
+  white-space: nowrap;
   font-weight: 500;
   font-size: 15px;
   transition: color 0.15s ease;
@@ -138,6 +141,7 @@ img, svg { display: block; max-width: 100%; }
 .pill {
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
   font-size: 13px;
@@ -377,6 +381,8 @@ img, svg { display: block; max-width: 100%; }
 /* ============ Showcase ============ */
 .showcase {
   padding: 24px 0 112px;
+  /* The baked-in shadows reach past the container; clip, not hidden, keeps the phone sticky. */
+  overflow-x: clip;
 }
 
 .showcase-list {
@@ -817,7 +823,19 @@ img, svg { display: block; max-width: 100%; }
   .more-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
-@media (max-width: 420px) {
+/* Phones get the App Store link from the hero badge and Safari's Smart App Banner. */
+@media (max-width: 560px) {
   .nav-inner .pill { display: none; }
+  .nav-links { gap: 16px; }
+}
+
+@media (max-width: 420px) {
   .container { padding: 0 18px; }
+}
+
+@media (max-width: 360px) {
+  .logo { gap: 8px; }
+  .logo-word { font-size: 19px; }
+  .nav-links { gap: 12px; }
+  .nav-link { font-size: 14px; }
 }
