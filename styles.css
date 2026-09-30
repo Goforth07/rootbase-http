@@ -344,22 +344,6 @@ img, svg { display: block; max-width: 100%; }
   gap: 16px;
 }
 
-.feature-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--dark);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.feature-icon svg {
-  width: 26px;
-  height: 26px;
-}
-
 .feature-title {
   font-family: "Lora", Georgia, serif;
   font-weight: 600;
