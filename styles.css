@@ -335,6 +335,65 @@ img, svg { display: block; max-width: 100%; }
   gap: 20px;
 }
 
+/* Phones and tablets: a row of cards to swipe through, the next one peeking in. */
+@media (max-width: 899px) {
+  .features-grid {
+    display: flex;
+    gap: 16px;
+    margin: 0 -24px;
+    padding: 4px 24px 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 24px;
+    scrollbar-width: none;
+  }
+
+  .features-grid::-webkit-scrollbar { display: none; }
+
+  .feature-card {
+    flex: 0 0 min(82%, 340px);
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 420px) {
+  .features-grid {
+    margin: 0 -18px;
+    padding-inline: 18px;
+    scroll-padding-inline: 18px;
+  }
+}
+
+/* Desktop with features.js: the section pins below the nav and the cards slide sideways as the
+   page scrolls. features.js sets the pin's height and the row's transform. */
+.has-feature-pin .features { padding: 0; }
+
+.has-feature-pin .features-sticky {
+  position: sticky;
+  top: var(--nav-height, 81px);
+  height: calc(100vh - var(--nav-height, 81px));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.has-feature-pin .features-sticky .container {
+  max-width: none;
+  padding: 0;
+}
+
+.has-feature-pin .features-grid {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  padding-inline: max(24px, calc((100% - var(--max-width)) / 2 + 24px));
+  will-change: transform;
+}
+
+.has-feature-pin .feature-card { flex: 0 0 340px; }
+
 .feature-card {
   background: var(--card);
   border-radius: var(--radius-card);
@@ -768,7 +827,6 @@ img, svg { display: block; max-width: 100%; }
 
 /* ============ Responsive ============ */
 @media (max-width: 960px) {
-  .features-grid { grid-template-columns: repeat(2, 1fr); }
   .how-steps { grid-template-columns: repeat(2, 1fr); gap: 36px 32px; }
   .more-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-inner { gap: 40px; }
@@ -802,7 +860,6 @@ img, svg { display: block; max-width: 100%; }
 }
 
 @media (max-width: 560px) {
-  .features-grid { grid-template-columns: 1fr; }
   .how-steps { grid-template-columns: 1fr; gap: 28px; }
   .more-grid { grid-template-columns: 1fr; gap: 24px; }
 }
