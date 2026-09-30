@@ -385,6 +385,12 @@ img, svg { display: block; max-width: 100%; }
   gap: 112px;
 }
 
+.showcase-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 112px;
+}
+
 .showcase-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -426,7 +432,9 @@ img, svg { display: block; max-width: 100%; }
   text-align: center;
 }
 
-/* Screenshots come composited into Apple's product bezels, transparent around the device. */
+/* Screenshots come composited into Apple's product bezels with the shadow baked in, since a
+   CSS drop-shadow on them painted in rectangular tiles while they decoded. The figure is sized
+   to the device; the image's shadow margins overflow it (percentages of the device's width). */
 .device {
   margin: 0;
   justify-self: center;
@@ -434,9 +442,7 @@ img, svg { display: block; max-width: 100%; }
 
 .device img {
   display: block;
-  width: 100%;
   height: auto;
-  filter: drop-shadow(0 24px 32px rgba(44, 36, 24, 0.22));
 }
 
 .device-phone {
@@ -444,9 +450,72 @@ img, svg { display: block; max-width: 100%; }
   max-width: 100%;
 }
 
+.device-phone img {
+  width: 123.95%;
+  max-width: none;
+  margin: -5.31% 0 -18.64% -11.97%;
+}
+
 .device-tablet {
   width: 100%;
   max-width: 1000px;
+}
+
+.device-tablet img {
+  width: 107.2%;
+  max-width: none;
+  margin: -1.59% 0 -5.61% -3.6%;
+}
+
+/* Pinned-phone tour: only with showcase.js, and only where there's room beside the captions. */
+.showcase-stage { display: none; }
+
+@media (min-width: 900px) {
+  .has-showcase-stage .showcase-tour {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .has-showcase-stage .showcase-steps { gap: 0; }
+
+  .has-showcase-stage .showcase-step {
+    display: flex;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .has-showcase-stage .showcase-step .device { display: none; }
+
+  .has-showcase-stage .showcase-step .showcase-copy {
+    order: 0;
+    opacity: 0.35;
+    transition: opacity 0.3s ease;
+  }
+
+  .has-showcase-stage .showcase-step.is-active .showcase-copy { opacity: 1; }
+
+  /* Phone is 300px wide, about 612px tall. */
+  .has-showcase-stage .showcase-stage {
+    display: grid;
+    position: sticky;
+    top: max(88px, calc(50vh - 306px));
+    margin: max(0px, calc(30vh - 306px)) 0;
+  }
+
+  .showcase-stage .showcase-shot {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .showcase-stage .showcase-shot.is-active { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-stage .showcase-shot,
+  .has-showcase-stage .showcase-step .showcase-copy { transition: none; }
 }
 
 /* ============ How check-ins work ============ */
@@ -728,7 +797,7 @@ img, svg { display: block; max-width: 100%; }
   .features { padding: 72px 0; }
   .how, .more { padding: 16px 0 72px; }
   .showcase { padding: 16px 0 80px; }
-  .showcase-list { gap: 72px; }
+  .showcase-list, .showcase-steps { gap: 72px; }
   .showcase-row { grid-template-columns: 1fr; gap: 32px; }
   .showcase-row--flip .showcase-copy { order: 0; }
   .showcase-copy { justify-self: start; }
